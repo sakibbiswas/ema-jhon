@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Product from '../products/Product';
 
+
 import "./Shop.css"
 const Shop = () => {
     const [products, setproducts] = useState([])
+    const [cart, setcart] = useState([])
+
+    const AddHandeltocart = (product) => {
+        const newcart = [...cart, product]
+        setcart(newcart)
+    }
     useEffect(() => {
         // fetch(`https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json`)
         fetch('products.json')
@@ -18,11 +25,13 @@ const Shop = () => {
                     products.map(product => <Product
                         key={product.id}
                         product={product}
+                        AddHandeltocart={AddHandeltocart}
                     ></Product>)
                 }
             </div>
             <div className="cart-container">
-                <h3>cart shop</h3>
+                <h3>Order summary</h3>
+                <p>selected items:{cart.length}</p>
             </div>
         </div>
     );

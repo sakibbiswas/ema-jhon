@@ -9,8 +9,9 @@ const Header = () => {
                 {/* a*4[href={$}]{$} */}
                 <a href='/Order'>Order</a>
                 <a href='/Order Review'>Order Review</a>
+                <a href='/Inventory'>Inventory</a>
                 <a href='/Manage Inventory'>Manage Inventory</a>
-                <a href='/Manage Inventory'>Manage Inventory</a>
+
             </div>
 
         </nav>
