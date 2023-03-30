@@ -1,0 +1,22 @@
+.cart {
+    background: rgba(255, 153, 0, 0.3);
+    padding: 45px;
+    position: sticky;
+    top: 0;
+
+
+}
+
+.cart-items {
+    margin-top: 50px;
+    padding-right: 23px;
+}
+
+.cart-items p {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.005em;
+}
