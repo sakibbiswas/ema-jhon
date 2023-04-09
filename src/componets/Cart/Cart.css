@@ -20,3 +20,23 @@
     line-height: 20px;
     letter-spacing: 0.005em;
 }
+
+.btn-clear {
+    width: 90%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+    background-color: rgb(246, 103, 55);
+}
+
+.orderbtn {
+    width: 90%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+    background-color: rgb(246, 103, 55);
+}

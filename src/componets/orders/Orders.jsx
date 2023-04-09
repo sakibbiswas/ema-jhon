@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Cart from '../Cart/Cart';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Reviewitems from '../Revewitems/Reviewitems';
 import "./Ordders.css"
-import { removeFromDb } from '../../utilities/fakedb';
+import { deleteShoppingCart, removeFromDb } from '../../utilities/fakedb';
 const Orders = () => {
     const savecart = useLoaderData()
     const [cart, setcart] = useState(savecart)
@@ -14,6 +14,11 @@ const Orders = () => {
         setcart(remaining);
         removeFromDb(id)
 
+    }
+    // side bar remove btn ar jonno
+    const handelClearcart = () => {
+        setcart([]);
+        deleteShoppingCart();
     }
     // console.log(cart);
 
@@ -27,6 +32,7 @@ const Orders = () => {
                         key={product.id}
                         product={product}
                         handelRemovecart={handelRemovecart}
+
                     >
 
 
@@ -34,7 +40,13 @@ const Orders = () => {
                 }
             </div>
             <div className="cart-container">
-                <Cart cart={cart}></Cart>
+                <Cart cart={cart}
+                    handelClearcart={handelClearcart}
+                >
+                    <Link className='proced-Link' to="/chackout">
+                        <button className='btnproced'>proced chackout</button>
+                    </Link>
+                </Cart>
             </div>
         </div>
 

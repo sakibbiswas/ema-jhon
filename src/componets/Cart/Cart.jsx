@@ -1,6 +1,9 @@
 import React from 'react';
 import "./Cart.css"
-const Cart = ({ cart }) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
+const Cart = ({ cart, handelClearcart, children }) => {
     // const cart = props.cart option 1
     // const {cart}=props option 2
     let Total = 0;
@@ -28,6 +31,9 @@ const Cart = ({ cart }) => {
                 <p>Total Shipping Charge:${totalshipping}</p>
                 <p>Tex:${tax.toFixed(2)}</p>
                 <h6>Grand Total:${garndTotal}</h6>
+                <button onClick={handelClearcart} className='btn-clear'> <span>Clear cart</span> <FontAwesomeIcon icon={faTrashAlt} ></FontAwesomeIcon></button>
+                {children}
+
             </div>
 
         </div>
