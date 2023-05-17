@@ -48,33 +48,57 @@ const Shop = () => {
         addToDb(product._id)
 
     }
+    // useEffect(() => {
+    //     // fetch(`https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json`)
+    //     fetch('http://localhost:5000/products')
+    //         .then(res => res.json())
+    //         .then(data => setproducts(data))
+    //     // .then(data => console.log(data))
+    // }, [])
+
     useEffect(() => {
-        // fetch(`https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json`)
-        fetch('http://localhost:5000/products')
-            .then(res => res.json())
-            .then(data => setproducts(data))
-        // .then(data => console.log(data))
-    }, [])
+        async function fetchData() {
+            const response = await fetch(`http://localhost:5000/products?page=${currentpage} &limit=${itemsperPage}`);
+            const data = await response.json();
+            setproducts(data);
+
+        }
+        fetchData();
+    },
+
+        [currentpage, itemsperPage])
 
     useEffect(() => {
         const storedCart = getShoppingCart()
-        const savecart = []
-        // step 1:get id
-        for (const id in storedCart) {
-            // get the products by using id
-            const addedproduct = products.find(product => product._id === id)
-            // setp 3 get quantity of product
-            if (addedproduct) {
-                const quantity = storedCart[id]
-                addedproduct.quantity = quantity;
-                // step 4 add the added product to the save cart
-                savecart.push(addedproduct)
-            }
-        }
-        setcart(savecart)
-    }, [products])
+        const ids = Object.keys(storedCart)
+        fetch(`http://localhost:5000/productsByIds`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(ids)
+        })
+            .then(res => res.json())
+            .then(CartProducts => {
+                const savecart = []
+                // step 1:get id
+                for (const id in storedCart) {
+                    // get the products by using id
+                    const addedproduct = CartProducts.find(product => product._id === id)
+                    // setp 3 get quantity of product
+                    if (addedproduct) {
+                        const quantity = storedCart[id]
+                        addedproduct.quantity = quantity;
+                        // step 4 add the added product to the save cart
+                        savecart.push(addedproduct)
+                    }
+                }
+                setcart(savecart)
+            })
 
-    const options = [5, 10, 20]
+    }, [])
+
+    const options = [5, 10, 15, 20]
     function hadelselectchange(event) {
         setitemsperpage(parseInt(event.target.value))
         setcurrentpage(0)
@@ -102,7 +126,7 @@ const Shop = () => {
 
             {/* pagination */}
             <div className="pagination">
-                <p>currenpage : {currentpage} an items per page {itemsperPage}</p>
+                <p>currenpage : {currentpage} and  items per page {itemsperPage}</p>
                 {
                     totalNumber.map(number => <button
                         key={number}
