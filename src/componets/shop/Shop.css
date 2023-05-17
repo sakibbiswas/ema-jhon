@@ -15,3 +15,14 @@
 .order-link {
     text-decoration: none;
 }
+
+.pagination {
+    text-align: center;
+    margin-bottom: 50px;
+    gap: 10px;
+
+}
+
+.selected {
+    background-color: darkgoldenrod;
+}
